@@ -34,12 +34,10 @@
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 -(void) setupQuestion:(Question *)question
 {
-    NSLog(@"QuestionEditorViewController setQuestion:(Question *)question");
     self.question = question;
 }
 
@@ -64,8 +62,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     NSLog(@"QuestionEditorViewController prepair for segue!");
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
 }
 
 #pragma mark - Table view data source

@@ -33,6 +33,7 @@
 +(void) serialiseArrayToFile:(NSMutableArray<Question*>*)array listFilePath:(NSString *)path;
 +(NSMutableArray<Question*>*) deserialiseFileAsArray:(NSString *)path;
 
+
 -(NSString*) toNSString;
 
 @end

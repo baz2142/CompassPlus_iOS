@@ -17,8 +17,8 @@
 -(void)         setAnswerText:(NSString *)text;
 -(NSString*)    getAnswerText;
 
-- (IBAction)editingCellDidBegin:(UITextField *)sender;
-- (IBAction)editingCellDidEnd:(UITextField *)sender;
+-(IBAction) editingCellDidBegin:(UITextField *)sender;
+-(IBAction) editingCellDidEnd:(UITextField *)sender;
 
 
 @end

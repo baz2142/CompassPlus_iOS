@@ -91,7 +91,7 @@
     
     AnswerTableViewCell *cell   = [tableView dequeueReusableCellWithIdentifier:@"AnswerCell" forIndexPath:indexPath];
     const size_t        index   = indexPath.row;
-    const NSString      *title  = @"title";//[[_question answers] objectAtIndex:index];
+    NSString* const     title  = @"title";//[[_question answers] objectAtIndex:index];
     
     [cell setIndex:index]; //[NSString stringWithFormat: @"%lu. %@", index + 1, title];
     [cell setAnswerText:title /*[[_question answers] objectAtIndex:index]*/];

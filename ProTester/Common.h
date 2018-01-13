@@ -9,6 +9,6 @@
 #ifndef Common_h
 #define Common_h
 
-static const NSString *questionsPlistPath = @"/Users/nickita/Desktop/ProTester/ProTester/questions.plist";
+static NSString* const questionsPlistPath = @"/Users/nickita/Desktop/ProTester/ProTester/questions.plist";
 
 #endif /* Common_h */

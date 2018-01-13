@@ -10,6 +10,7 @@
 
 #import "TextCollectionViewCell.h"
 #import "Question.h"
+#import "QuestionViewController.h"
 
 @interface QuestionsCollectionViewController: UICollectionViewController
 

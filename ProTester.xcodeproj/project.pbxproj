@@ -14,9 +14,9 @@
 		A72B86BD1FFB6B9B00C7E1ED /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A72B86BC1FFB6B9B00C7E1ED /* Assets.xcassets */; };
 		A72B86C01FFB6B9B00C7E1ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A72B86BE1FFB6B9B00C7E1ED /* LaunchScreen.storyboard */; };
 		A761B4D92000D8D800DB76F5 /* questions.plist in Resources */ = {isa = PBXBuildFile; fileRef = A761B4D82000D8D800DB76F5 /* questions.plist */; };
+		A7B285F0200A13DD0079FFF5 /* TextCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7B285EF200A13DD0079FFF5 /* TextCollectionViewCell.m */; };
 		A7D3B8BD2003D90D00354DA7 /* QuestionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7D3B8BC2003D90D00354DA7 /* QuestionViewController.m */; };
 		A7E2CC5E2008D35C00974983 /* QuestionsCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E2CC5D2008D35C00974983 /* QuestionsCollectionViewController.m */; };
-		A7E2CC612008DD9900974983 /* TextCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A7E2CC602008DD9900974983 /* TextCollectionViewCell.m */; };
 		A7F54A171FFBF99E00CB0984 /* Question.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F54A161FFBF99E00CB0984 /* Question.m */; };
 		A7F54A361FFE90C400CB0984 /* QuestionsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F54A351FFE90C400CB0984 /* QuestionsTableViewController.m */; };
 		A7F54A391FFE94A500CB0984 /* QuestionEditorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A7F54A381FFE94A500CB0984 /* QuestionEditorViewController.m */; };
@@ -37,13 +37,13 @@
 		A72B86BF1FFB6B9B00C7E1ED /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A72B86C11FFB6B9B00C7E1ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A761B4D82000D8D800DB76F5 /* questions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = questions.plist; sourceTree = "<group>"; };
+		A7B285EE200A13DD0079FFF5 /* TextCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextCollectionViewCell.h; sourceTree = "<group>"; };
+		A7B285EF200A13DD0079FFF5 /* TextCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextCollectionViewCell.m; sourceTree = "<group>"; };
 		A7C574AF1FFEB0B000F831EB /* Common.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Common.h; sourceTree = "<group>"; };
 		A7D3B8BB2003D90D00354DA7 /* QuestionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionViewController.h; sourceTree = "<group>"; };
 		A7D3B8BC2003D90D00354DA7 /* QuestionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionViewController.m; sourceTree = "<group>"; };
 		A7E2CC5C2008D35C00974983 /* QuestionsCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionsCollectionViewController.h; sourceTree = "<group>"; };
 		A7E2CC5D2008D35C00974983 /* QuestionsCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionsCollectionViewController.m; sourceTree = "<group>"; };
-		A7E2CC5F2008DD9900974983 /* TextCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TextCollectionViewCell.h; path = ../TextCollectionViewCell.h; sourceTree = "<group>"; };
-		A7E2CC602008DD9900974983 /* TextCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TextCollectionViewCell.m; path = ../TextCollectionViewCell.m; sourceTree = "<group>"; };
 		A7F54A151FFBF99E00CB0984 /* Question.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Question.h; sourceTree = "<group>"; };
 		A7F54A161FFBF99E00CB0984 /* Question.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Question.m; sourceTree = "<group>"; };
 		A7F54A341FFE90C400CB0984 /* QuestionsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionsTableViewController.h; sourceTree = "<group>"; };
@@ -101,10 +101,6 @@
 				A72B86B01FFB6B9B00C7E1ED /* Supporting Files */,
 				A7F54A151FFBF99E00CB0984 /* Question.h */,
 				A7F54A161FFBF99E00CB0984 /* Question.m */,
-				A7F54A341FFE90C400CB0984 /* QuestionsTableViewController.h */,
-				A7F54A351FFE90C400CB0984 /* QuestionsTableViewController.m */,
-				A7F54A371FFE94A400CB0984 /* QuestionEditorViewController.h */,
-				A7F54A381FFE94A500CB0984 /* QuestionEditorViewController.m */,
 				A7C574AF1FFEB0B000F831EB /* Common.h */,
 				A761B4D82000D8D800DB76F5 /* questions.plist */,
 				A7FFDC842003B2DF00006A3F /* LoginViewController.h */,
@@ -113,10 +109,14 @@
 				A7FFDC882003B37600006A3F /* UserProfile.m */,
 				A7D3B8BB2003D90D00354DA7 /* QuestionViewController.h */,
 				A7D3B8BC2003D90D00354DA7 /* QuestionViewController.m */,
+				A7F54A341FFE90C400CB0984 /* QuestionsTableViewController.h */,
+				A7F54A351FFE90C400CB0984 /* QuestionsTableViewController.m */,
+				A7F54A371FFE94A400CB0984 /* QuestionEditorViewController.h */,
+				A7F54A381FFE94A500CB0984 /* QuestionEditorViewController.m */,
 				A7E2CC5C2008D35C00974983 /* QuestionsCollectionViewController.h */,
 				A7E2CC5D2008D35C00974983 /* QuestionsCollectionViewController.m */,
-				A7E2CC5F2008DD9900974983 /* TextCollectionViewCell.h */,
-				A7E2CC602008DD9900974983 /* TextCollectionViewCell.m */,
+				A7B285EE200A13DD0079FFF5 /* TextCollectionViewCell.h */,
+				A7B285EF200A13DD0079FFF5 /* TextCollectionViewCell.m */,
 			);
 			path = ProTester;
 			sourceTree = "<group>";
@@ -208,7 +208,7 @@
 				A7FFDC8320038F3300006A3F /* AnswerTableViewCell.m in Sources */,
 				A7F54A391FFE94A500CB0984 /* QuestionEditorViewController.m in Sources */,
 				A7F54A171FFBF99E00CB0984 /* Question.m in Sources */,
-				A7E2CC612008DD9900974983 /* TextCollectionViewCell.m in Sources */,
+				A7B285F0200A13DD0079FFF5 /* TextCollectionViewCell.m in Sources */,
 				A7D3B8BD2003D90D00354DA7 /* QuestionViewController.m in Sources */,
 				A72B86B51FFB6B9B00C7E1ED /* AppDelegate.m in Sources */,
 				A72B86B21FFB6B9B00C7E1ED /* main.m in Sources */,

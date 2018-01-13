@@ -9,12 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "Question.h"
 
-@interface QuestionViewController : UIViewController
+@interface QuestionViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UIImageView  *image;
 @property (strong, nonatomic) IBOutlet UILabel      *questionText;
 @property (strong, nonatomic) IBOutlet UITableView  *answersTable;
 
-@property (strong, nonatomic) Question *question;
+@property (strong, nonatomic) const Question *question;
+
+-(void) setupQuestion: (const Question* const) quest;
+-(void) setupUIBasedOnQuestion;
 
 @end

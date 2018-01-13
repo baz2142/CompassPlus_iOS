@@ -19,14 +19,12 @@ static NSString* const reuseIdentifier = @"Cell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self.collectionView registerClass:[QuestionsCollectionViewController class] forCellWithReuseIdentifier:reuseIdentifier];
+    //[self.collectionView registerClass:[UICollectionViewController class] forCellWithReuseIdentifier:@"Cell"];
     
     _questions = [Question deserialiseFileAsArray:questionsPlistPath];
     
     if (_questions == nil)
         NSLog(@"QuestionsCollectionViewController: questions = nil!");
-    
-    
     
     // Do any additional setup after loading the view.
 }
@@ -36,15 +34,22 @@ static NSString* const reuseIdentifier = @"Cell";
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    const NSIndexPath       *indexPath  = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
+    const size_t            index       = indexPath.row;
+    QuestionViewController  *controller = [segue destinationViewController];
+    const Question* const   question    = [_questions objectAtIndex:index];
+    
+    NSLog(@"Selected cell at index = %lu", index);
+    
+    [controller setupQuestion:question];
 }
-*/
+
 
 #pragma mark <UICollectionViewDataSource>
 
@@ -62,11 +67,11 @@ static NSString* const reuseIdentifier = @"Cell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     const size_t            index  = indexPath.row;
-    TextCollectionViewCell  *cell  = (TextCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+    TextCollectionViewCell  *cell  = (TextCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
     NSString* const         text   = [NSString stringWithFormat:@"%lu", index];
     
-    [cell.textLabel setText:text];
-    //[cell setupText:text];
+    //[cell.textLabel setText:text];
+    [cell setupText:text];
     
     return cell;
 }

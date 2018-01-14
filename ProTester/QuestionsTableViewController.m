@@ -66,7 +66,7 @@
 {
     const size_t index = indexPath.row;
     
-    NSLog(@"didSelectRowAtIndexPath at index = %lu", index);
+    NSLog(@"QuestionTable: didSelectRowAtIndexPath at index = %lu", index);
     
     [self updateControllWidgets];
 }
@@ -86,6 +86,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
+    NSLog(@"QuestionTableView: prepairForSegue");
+    
     const QuestionEditorViewController  *controller = [segue destinationViewController];
     const NSIndexPath                   *indexPath  = [self.tableView indexPathForSelectedRow];
     const size_t                        row         = (size_t)indexPath.row;
@@ -158,6 +160,25 @@
     [_editButton        setEnabled:editEnabled];
     [_deleteButton      setEnabled:deleteEnabled];
     [_eraseAllButton    setEnabled:eraseAllEnabled];
+}
+
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return true;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        NSLog(@"Delete!!");
+    }
 }
 
 @end

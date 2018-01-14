@@ -48,7 +48,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;//[_question answers].count;
+    return [_question answers].count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -64,9 +64,9 @@
 {
     NSLog(@"Question view: cellForRowAtIndexPath");
     
-    UITableViewCell *cell   = [tableView dequeueReusableCellWithIdentifier:@"AnswerCell" forIndexPath:indexPath];
+    UITableViewCell     *cell   = [tableView dequeueReusableCellWithIdentifier:@"AnswerCell" forIndexPath:indexPath];
     const size_t        index   = indexPath.row;
-    NSString* const     title  = @"title";//[[_question answers] objectAtIndex:index];
+    NSString* const     title   = [[_question answers] objectAtIndex:index];
     
     [cell.textLabel setText:title];
     //[cell setIndex:index]; //[NSString stringWithFormat: @"%lu. %@", index + 1, title];

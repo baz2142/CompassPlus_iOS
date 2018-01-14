@@ -39,6 +39,9 @@
 -(void) setupQuestion:(Question *)question
 {
     self.question = question;
+    
+    if (!question.answers)
+        question.answers = [[NSMutableArray alloc] init];
 }
 
 -(void) fillUIBasedOnQuestion
@@ -46,7 +49,6 @@
     [self.picturePathTextField          setText:[_question getPictPath]];
     [self.questionTextField             setText:[_question getQuestionText]];
     [self.correctAnswerIndexTextField   setText:[NSString stringWithFormat:@"%lu", [_question getCorrectAnswerIndex]]];
-    
 }
 
 -(void) fillQuestionBasedOnUI
@@ -54,6 +56,17 @@
     [self.question setPictPath:             self.picturePathTextField.text];
     [self.question setQuestionText:         self.questionTextField.text];
     [self.question setCorrectAnswerIndex:   [self.correctAnswerIndexTextField.text integerValue]];
+}
+
+- (IBAction)addAnswer:(UIBarButtonItem *)sender
+{
+    const size_t            index           = self.question.answers.count;
+    NSIndexPath             *indexPath      = [NSIndexPath indexPathForRow:index inSection:0];
+    NSArray<NSIndexPath*>   *indexArray     = [[NSArray alloc] initWithObjects:indexPath, NULL];
+    
+    [self.question addAnswer:@"An undefined answer"];
+    [self.tableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationFade];
+    //[self.tableView reloadData];
 }
 
 #pragma mark - Navigation
@@ -73,7 +86,8 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 5;//[_question answers].count;
+    NSLog(@"QnumberOfRowsInSection!");
+    return self.question.answers == NULL ? 0 : self.question.answers.count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -91,13 +105,48 @@
     
     AnswerTableViewCell *cell   = [tableView dequeueReusableCellWithIdentifier:@"AnswerCell" forIndexPath:indexPath];
     const size_t        index   = indexPath.row;
-    NSString* const     title  = @"title";//[[_question answers] objectAtIndex:index];
+    //NSString*           title   = [[_question answers] objectAtIndex:index];
     
-    [cell setIndex:index]; //[NSString stringWithFormat: @"%lu. %@", index + 1, title];
-    [cell setAnswerText:title /*[[_question answers] objectAtIndex:index]*/];
+    [cell setupAnswersArray:index array:self.question.answers];
+    //[cell setIndex:index + 1];
+    //[cell setAnswerText:title];
     
     return cell;
 }
 
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return true;
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    const size_t index = indexPath.row;
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        NSLog(@"Delete!!");
+        
+        [self.question.answers removeObjectAtIndex:index];
+        [self.tableView deleteRowsAtIndexPaths:[[NSArray alloc] initWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
+    }
+}
+
+//-(NSMutableArray<AnswerTableViewCell*>*) getAllCells
+//{
+//    NSMutableArray<AnswerTableViewCell*> *cells = [[NSMutableArray alloc] init];
+//    
+//    const size_t count = self.question.answers.count;
+//    
+//    for (size_t i = 0; i < count; ++i)
+//        [self.tableView index]
+//    
+//    return cells;
+//}
 
 @end

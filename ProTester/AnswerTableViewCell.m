@@ -23,12 +23,13 @@
     // Configure the view for the selected state
 }
 
--(void) setIndex:(size_t)index
+-(void) setupIndex:(size_t)index
 {
+    self.index = index;
     [_indexLabel setText: [NSString stringWithFormat:@"%lu.", index]];
 }
 
--(void) setAnswerText:(NSString *)text
+-(void) setupAnswerText:(NSString *)text
 {
     [_answerTextField setText:text];
 }
@@ -46,6 +47,14 @@
 - (IBAction)editingCellDidEnd:(UITextField *)sender
 {
     [self setSelected:false];
+    [self.answersArray setObject:[self getAnswerText] atIndexedSubscript:self.index];
+}
+
+-(void) setupAnswersArray:(size_t)index array:(NSMutableArray*)arr
+{
+    [self setupIndex:index];
+    [self setupAnswerText: [arr objectAtIndex:index]];
+    self.answersArray = arr;
 }
 
 @end

@@ -14,19 +14,36 @@
 {
     if (self = [super init])
     {
-        _pictPath           = @"Picture path is undefied";
-        _questionText       = @"Question text is undefined";
-        _answers            = [[NSMutableArray alloc] init];
-        _correctAnswerIndex = 666lu;
+        _pictPath               = @"A pictures path is undefied";
+        _questionText           = @"A question text is undefined";
+        _answers                = [[NSMutableArray alloc] init];
+        _correctAnswersIndeces  = [[NSMutableDictionary alloc] init];
     }
     
     return self;
 }
 
--(void) addAnswer:(NSString *)answer
+-(void) addAnswer:(nonnull NSString *)answer isCorrect:(bool)isCorrect
 {
+    assert(answer != NULL);
+    
     if (_answers != NULL)
+    {
+        const size_t newIndex   = self.answers.count;
+        NSNumber *nsIndex       = [NSNumber numberWithUnsignedInt:newIndex];
+        NSNumber *nsBool        = [NSNumber numberWithBool:isCorrect];
+        
         [_answers addObject: answer];
+        [self.correctAnswersIndeces setObject:nsBool forKey:nsIndex];
+    }
+}
+
+-(void) removeAnswerAtIndex:(size_t)index
+{
+    assert(index < self.answers.count);
+    
+    [self.answers removeObjectAtIndex:index];
+    [self.correctAnswersIndeces removeObjectForKey:[NSNumber numberWithUnsignedInt:index]];
 }
 
 -(id) initWithCoder: (NSCoder*) coder
@@ -36,10 +53,10 @@
         self.pictPath               = [coder decodeObjectForKey: @"picturePath"];
         self.questionText           = [coder decodeObjectForKey: @"questionText"];
         self.answers                = [coder decodeObjectForKey: @"answers"];
-        self.correctAnswerIndex     = (size_t)[coder decodeInt64ForKey: @"correctAnswerIndex"];
+        self.correctAnswersIndeces  = [coder decodeObjectForKey: @"correctAnswersIndeces"];
     }
     else
-        NSLog(@"Question inited with NULL!");
+        NSLog(@"The question inited with NULL!");
     
     return self;
 }
@@ -54,17 +71,12 @@
     _questionText = [questionText copy];
 }
 
--(void) setCorrectAnswerIndex:(size_t)correctAnswerIndex
-{
-    _correctAnswerIndex = correctAnswerIndex;
-}
-
 -(void) encodeWithCoder: (NSCoder*) coder
 {
-    [coder encodeObject: self.pictPath              forKey: @"picturePath"];
-    [coder encodeObject: self.questionText          forKey: @"questionText"];
-    [coder encodeObject: self.answers               forKey: @"answers"];
-    [coder encodeInt64:  self.correctAnswerIndex    forKey: @"correctAnswerIndex"];
+    [coder encodeObject: self.pictPath                  forKey: @"picturePath"];
+    [coder encodeObject: self.questionText              forKey: @"questionText"];
+    [coder encodeObject: self.answers                   forKey: @"answers"];
+    [coder encodeObject: self.correctAnswersIndeces     forKey: @"correctAnswersIndeces"];
 }
 
 -(NSString*) getPictPath;
@@ -77,17 +89,13 @@
     return _questionText;
 }
 
--(NSString*) getAnswerAtIndex: (size_t) index
+-(NSString*) getAnswerAtIndex: (size_t)index
 {
-    return _answers != NULL ? [_answers objectAtIndex: index] : NULL;
+    return _answers != NULL ? [_answers objectAtIndex:index] : NULL;
 }
 
--(size_t) getCorrectAnswerIndex
-{
-    return _correctAnswerIndex;
-}
 
-+(void) serialiseArrayToFile: (NSMutableArray<Question*> *)array listFilePath: (NSString *) path;
++(void) serialiseArrayToFile:(NSMutableArray<Question*> *)array listFilePath:(NSString *)path;
 {
     NSError *error = NULL;
     NSData  *plist = [NSKeyedArchiver archivedDataWithRootObject:array];
@@ -96,7 +104,7 @@
     {
         bool ok = [plist writeToFile:path atomically:true];
         
-        NSLog(ok ? @"Success serialisation!" : @"Error writing to file: %@", path);
+        NSLog(ok ? @"Success serialisation!" : @"Error writing to the file: %@", path);
     }
     else
         NSLog(@"Error: %@", error);
@@ -106,7 +114,7 @@
 {
     NSMutableArray<Question*> *array = [NSKeyedUnarchiver unarchiveObjectWithFile: path];
     
-    NSLog(array ? @"Success derialisation!" : @"Deserialisation failed");
+    NSLog(array ? @"Success derialisation!" : @"Deserialisation have failed");
     
     return array;
 }

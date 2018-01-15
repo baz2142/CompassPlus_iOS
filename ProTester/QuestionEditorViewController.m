@@ -48,14 +48,12 @@
 {
     [self.picturePathTextField          setText:[_question getPictPath]];
     [self.questionTextField             setText:[_question getQuestionText]];
-    [self.correctAnswerIndexTextField   setText:[NSString stringWithFormat:@"%lu", [_question getCorrectAnswerIndex]]];
 }
 
 -(void) fillQuestionBasedOnUI
 {
     [self.question setPictPath:             self.picturePathTextField.text];
     [self.question setQuestionText:         self.questionTextField.text];
-    [self.question setCorrectAnswerIndex:   [self.correctAnswerIndexTextField.text integerValue]];
 }
 
 - (IBAction)addAnswer:(UIBarButtonItem *)sender
@@ -63,8 +61,9 @@
     const size_t            index           = self.question.answers.count;
     NSIndexPath             *indexPath      = [NSIndexPath indexPathForRow:index inSection:0];
     NSArray<NSIndexPath*>   *indexArray     = [[NSArray alloc] initWithObjects:indexPath, NULL];
+    AnswerTableViewCell     *cell           = [self.tableView cellForRowAtIndexPath:indexPath];
     
-    [self.question addAnswer:@"An undefined answer"];
+    [self.question addAnswer:@"An undefined answer" isCorrect:cell.isCorrect];
     [self.tableView insertRowsAtIndexPaths:indexArray withRowAnimation:UITableViewRowAnimationFade];
     //[self.tableView reloadData];
 }
@@ -105,11 +104,8 @@
     
     AnswerTableViewCell *cell   = [tableView dequeueReusableCellWithIdentifier:@"AnswerCell" forIndexPath:indexPath];
     const size_t        index   = indexPath.row;
-    //NSString*           title   = [[_question answers] objectAtIndex:index];
     
-    [cell setupAnswersArray:index array:self.question.answers];
-    //[cell setIndex:index + 1];
-    //[cell setAnswerText:title];
+    [cell setupAnswersArray:self.question.answers withIsCorrectDictionary:self.question.correctAnswersIndeces withIndex:index];
     
     return cell;
 }
@@ -136,17 +132,5 @@
         [self.tableView deleteRowsAtIndexPaths:[[NSArray alloc] initWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
-
-//-(NSMutableArray<AnswerTableViewCell*>*) getAllCells
-//{
-//    NSMutableArray<AnswerTableViewCell*> *cells = [[NSMutableArray alloc] init];
-//    
-//    const size_t count = self.question.answers.count;
-//    
-//    for (size_t i = 0; i < count; ++i)
-//        [self.tableView index]
-//    
-//    return cells;
-//}
 
 @end

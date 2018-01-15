@@ -153,12 +153,10 @@
     const size_t        index               = isAnyCellSelected ? indexPath.row : 0lu;
 
     const bool editEnabled      = isAnyCellSelected && index < _questions.count;
-    const bool deleteEnabled    = isAnyCellSelected && index < _questions.count;
     const bool eraseAllEnabled  = _questions.count != 0;
     
     [_createNewButton   setEnabled:true];
     [_editButton        setEnabled:editEnabled];
-    [_deleteButton      setEnabled:deleteEnabled];
     [_eraseAllButton    setEnabled:eraseAllEnabled];
 }
 
@@ -175,9 +173,14 @@
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    const size_t index = indexPath.row;
+    
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         NSLog(@"Delete!!");
+        
+        [self.questions removeObjectAtIndex:index];
+        [self.tableView deleteRowsAtIndexPaths:[[NSArray alloc] initWithObjects:indexPath, nil] withRowAnimation:UITableViewRowAnimationFade];
     }
 }
 

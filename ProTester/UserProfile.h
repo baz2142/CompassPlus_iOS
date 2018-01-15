@@ -8,9 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-@interface UserProfile : NSCoder
+@interface UserProfile: NSCoder
 
-@property (strong, nonatomic) NSString              *loginName;
-@property (strong, nonatomic) NSMutableDictionary   *statistics;
+@property (strong, nonatomic) NSString                                      *loginName;
+@property (strong, nonatomic) NSMutableDictionary<NSNumber*, NSNumber*>     *statistics;
+
+
+-(void) encodeWithCoder:(NSCoder*)coder;
+-(void) serialiseUserProfileToFile:(NSString *)path;
+
+-(id) initWithCoder: (NSCoder*) coder;
++(UserProfile*) deserialiseFileAsUserProfile:(NSString *)path;
 
 @end

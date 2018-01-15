@@ -69,8 +69,6 @@
     NSString* const     title   = [[_question answers] objectAtIndex:index];
     
     [cell.textLabel setText:title];
-    //[cell setIndex:index]; //[NSString stringWithFormat: @"%lu. %@", index + 1, title];
-    //[cell setAnswerText:title /*[[_question answers] objectAtIndex:index]*/];
     
     return cell;
 }

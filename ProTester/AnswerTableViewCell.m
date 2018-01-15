@@ -10,13 +10,13 @@
 
 @implementation AnswerTableViewCell
 
-- (void)awakeFromNib
+-(void) awakeFromNib
 {
     [super awakeFromNib];
     // Initialization code
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated
+-(void) setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];
 
@@ -34,27 +34,42 @@
     [_answerTextField setText:text];
 }
 
--(NSString*) getAnswerText
+-(void) setIsCorrect:(bool)isCorrect
+{
+    [_isCorrectSwitcher setOn:isCorrect];
+}
+
+-(NSString *) getAnswerText
 {
     return [_answerTextField.text copy];
 }
 
-- (IBAction)editingCellDidBegin:(UITextField *)sender
+-(IBAction) editingCellDidBegin:(UITextField *)sender
 {
     [self setSelected:true];
 }
 
-- (IBAction)editingCellDidEnd:(UITextField *)sender
+-(IBAction) editingCellDidEnd:(UITextField *)sender
 {
     [self setSelected:false];
     [self.answersArray setObject:[self getAnswerText] atIndexedSubscript:self.index];
+    [self.isCorrectDict setObject:[NSNumber numberWithBool:self.isCorrect] forKey:[NSNumber numberWithUnsignedInt:self.index]];
 }
 
--(void) setupAnswersArray:(size_t)index array:(NSMutableArray*)arr
+-(void) setupAnswersArray:(NSMutableArray*)arr withIsCorrectDictionary:(NSMutableDictionary*)dict withIndex:(size_t)index;
 {
     [self setupIndex:index];
     [self setupAnswerText: [arr objectAtIndex:index]];
-    self.answersArray = arr;
+    
+    self.answersArray   = arr;
+    self.isCorrectDict  = dict;
+    
+    [self.isCorrectSwitcher setOn:[[dict objectForKey:[NSNumber numberWithUnsignedInt:index]] boolValue]];
+}
+
+-(bool) isCorrect
+{
+    return [_isCorrectSwitcher isOn];
 }
 
 @end

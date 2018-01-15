@@ -16,12 +16,10 @@
 
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *createNewButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *editButton;
-@property (strong, nonatomic) IBOutlet UIBarButtonItem *deleteButton;
 @property (strong, nonatomic) IBOutlet UIBarButtonItem *eraseAllButton;
 
 - (IBAction)createNewPressed:(UIBarButtonItem *)sender;
 - (IBAction)editPressed:(UIBarButtonItem *)sender;
-- (IBAction)deletePressed:(UIBarButtonItem *)sender;
 - (IBAction)eraseAllPressed:(UIBarButtonItem *)sender;
 
 - (void)updateControllWidgets;

@@ -11,24 +11,23 @@
 
 @interface Question: NSCoder
 
-@property (strong, nonatomic) NSString         *pictPath;
-@property (strong, nonatomic) NSString         *questionText;
-@property (strong, nonatomic) NSMutableArray   *answers;
-@property (nonatomic)         size_t           correctAnswerIndex;
+@property (strong, nonatomic) NSString                                      *pictPath;
+@property (strong, nonatomic) NSString                                      *questionText;
+@property (strong, nonatomic) NSMutableArray<NSString*>                     *answers;
+@property (strong, nonatomic) NSMutableDictionary<NSNumber*, NSNumber*>     *correctAnswersIndeces;
 
--(void) addAnswer: (NSString *)answer;
--(void) encodeWithCoder: (NSCoder*) coder;
+-(void) addAnswer:(NSString *)answer isCorrect:(bool)isCorrect;
+-(void) removeAnswerAtIndex:(size_t)index;
+-(void) encodeWithCoder:(NSCoder*)coder;
 
 -(void) setPictPath:(NSString *)pictPath;
 -(void) setQuestionText:(NSString *)questionText;
--(void) setCorrectAnswerIndex:(size_t)correctAnswerIndex;
 
 -(id) initWithCoder: (NSCoder*) coder;
 
 -(NSString*)    getPictPath;
 -(NSString*)    getQuestionText;
 -(NSString*)    getAnswerAtIndex: (size_t)index;
--(size_t)       getCorrectAnswerIndex;
 
 +(void) serialiseArrayToFile:(NSMutableArray<Question*>*)array listFilePath:(NSString *)path;
 +(NSMutableArray<Question*>*) deserialiseFileAsArray:(NSString *)path;

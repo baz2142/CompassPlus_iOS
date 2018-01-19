@@ -19,7 +19,7 @@
     [super viewDidLoad];
     
     NSLog(@"QuestionsTableViewController did load!");
-    _questions = [Question deserialiseFileAsArray:questionsPlistPath];
+    _questions = [Question deserialiseFileAsArray: [root stringByAppendingString:questionsPlistName]];
     
     if (!_questions)
     {
@@ -41,7 +41,7 @@
 - (void) viewDidDisappear:(BOOL)animated
 {
     NSLog(@"QuestionsTableViewController viewDidDisappear: trying to save the array.");
-    [Question serialiseArrayToFile:_questions listFilePath:questionsPlistPath];
+    [Question serialiseArrayToFile:_questions listFilePath:[root stringByAppendingString:questionsPlistName]];
 }
 
 - (void)didReceiveMemoryWarning

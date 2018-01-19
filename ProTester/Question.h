@@ -30,7 +30,7 @@
 -(NSString*)    getAnswerAtIndex: (size_t)index;
 
 +(void) serialiseArrayToFile:(NSMutableArray<Question*>*)array listFilePath:(NSString *)path;
-+(NSMutableArray<Question*>*) deserialiseFileAsArray:(NSString *)path;
++(NSMutableArray<Question*>*) deserialiseFileAsArray:(const NSString *)path;
 
 
 -(NSString*) toNSString;

@@ -7,17 +7,18 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Common.h"
 
 @interface UserProfile: NSCoder
 
 @property (strong, nonatomic) NSString                                      *loginName;
 @property (strong, nonatomic) NSMutableDictionary<NSNumber*, NSNumber*>     *statistics;
 
-
 -(void) encodeWithCoder:(NSCoder*)coder;
 -(void) serialiseUserProfileToFile:(NSString *)path;
 
 -(id) initWithCoder: (NSCoder*) coder;
 +(UserProfile*) deserialiseFileAsUserProfile:(NSString *)path;
++(NSString*) getUserProfilePath:(NSString*)userName;
 
 @end

@@ -21,7 +21,9 @@ static NSString* const reuseIdentifier = @"Cell";
     [super viewDidLoad];
     //[self.collectionView registerClass:[UICollectionViewController class] forCellWithReuseIdentifier:@"Cell"];
     
-    _questions = [Question deserialiseFileAsArray:questionsPlistPath];
+    const NSString *questionsPlistFilePath = [root stringByAppendingString:questionsPlistName];
+    
+    _questions = [Question deserialiseFileAsArray:questionsPlistFilePath];
     
     if (_questions == nil)
         NSLog(@"QuestionsCollectionViewController: questions = nil!");
@@ -43,11 +45,10 @@ static NSString* const reuseIdentifier = @"Cell";
     const NSIndexPath       *indexPath  = [[self.collectionView indexPathsForSelectedItems] objectAtIndex:0];
     const size_t            index       = indexPath.row;
     QuestionViewController  *controller = [segue destinationViewController];
-    const Question* const   question    = [_questions objectAtIndex:index];
     
     NSLog(@"Selected cell at index = %lu", index);
     
-    [controller setupQuestion:question];
+    [controller setupQuestionWithArray:self.questions atIndex:index];
 }
 
 
@@ -74,6 +75,11 @@ static NSString* const reuseIdentifier = @"Cell";
     [cell setupText:text];
     
     return cell;
+}
+
+-(void) setupUserProfile:(UserProfile*)userProfile
+{
+    self.user = userProfile;
 }
 
 #pragma mark <UICollectionViewDelegate>

@@ -11,9 +11,13 @@
 #import "TextCollectionViewCell.h"
 #import "Question.h"
 #import "QuestionViewController.h"
+#import "UserProfile.h"
 
 @interface QuestionsCollectionViewController: UICollectionViewController
 
 @property (strong, nonatomic) const NSMutableArray<Question*> *questions;
+@property (strong, nonatomic) UserProfile *user;
+
+-(void) setupUserProfile:(UserProfile*)userProfile;
 
 @end

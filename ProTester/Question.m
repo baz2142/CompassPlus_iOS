@@ -110,9 +110,9 @@
         NSLog(@"Error: %@", error);
 }
 
-+(NSMutableArray<Question*>*) deserialiseFileAsArray: (NSString *) path;
++(NSMutableArray<Question*>*) deserialiseFileAsArray:(const NSString *)path;
 {
-    NSMutableArray<Question*> *array = [NSKeyedUnarchiver unarchiveObjectWithFile: path];
+    NSMutableArray<Question*> *array = [NSKeyedUnarchiver unarchiveObjectWithFile:[path copy]];
     
     NSLog(array ? @"Success derialisation!" : @"Deserialisation have failed");
     

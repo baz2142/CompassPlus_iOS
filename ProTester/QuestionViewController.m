@@ -19,25 +19,32 @@
     [super viewDidLoad];
     
     [self setupUIBasedOnQuestion];
-    // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
--(void) setupQuestion: (const Question* const) quest
+-(void) setupQuestionWithArray:(const NSMutableArray* const)quests atIndex:(size_t)index;
 {
-    _question = quest;
+    self.questions  = quests;
+    self.index      = index;
 }
 
 -(void) setupUIBasedOnQuestion
 {
-    [self.questionText setText:_question.getQuestionText];
+    [self.questionText setText:self.getCurrentQuestion.questionText];
+    [self.answersTable reloadData];
+    
+    const size_t size   = self.questions.count;
+    const bool isFirst  = self.index == 0;
+    const bool isLast   = self.index == size - 1;
+    
+    [self.prevButton setEnabled:!isFirst];
+    [self.nextButton setEnabled:!isLast];
+    [self.navigationItem setTitle:[NSString stringWithFormat:@"A question #%zu", self.index]];
 }
-
 
 #pragma mark - Table view data source
 
@@ -48,7 +55,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [_question answers].count;
+    return [self.getCurrentQuestion answers].count;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -66,22 +73,33 @@
     
     UITableViewCell     *cell   = [tableView dequeueReusableCellWithIdentifier:@"AnswerCell" forIndexPath:indexPath];
     const size_t        index   = indexPath.row;
-    NSString* const     title   = [[_question answers] objectAtIndex:index];
+    NSString* const     title   = [[[_questions objectAtIndex:self.index] answers] objectAtIndex:index];
     
-    [cell.textLabel setText:title];
+    [cell.textLabel setText:[NSString stringWithFormat:@"%lu. %@", index + 1, title]];
     
     return cell;
 }
 
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+-(Question*) getCurrentQuestion
+{
+    return [self.questions objectAtIndex:self.index];
 }
-*/
+
+- (IBAction)nextButtonPressed:(UIButton *)sender
+{
+    self.index++;
+    [self setupUIBasedOnQuestion];
+}
+
+- (IBAction)prevButtonPressed:(UIButton *)sender
+{
+    self.index--;
+    [self setupUIBasedOnQuestion];
+}
+
+- (IBAction)confirmButtonPressed:(UIButton *)sender
+{
+    //[self.user.statistics set]
+}
 
 @end

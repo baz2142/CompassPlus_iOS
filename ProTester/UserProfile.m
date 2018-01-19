@@ -62,9 +62,14 @@
         NSLog(@"The userprofile inited with NULL!");
     
     return self;
-
 }
 
++(NSString*) getUserProfilePath:(NSString*)userName
+{
+    NSString* const fileName = [NSString stringWithFormat:@"User_%@.plist", userName];
+    
+    return [root stringByAppendingString:fileName];
+}
 
 
 @end

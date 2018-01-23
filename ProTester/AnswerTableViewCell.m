@@ -26,7 +26,7 @@
 -(void) setupIndex:(size_t)index
 {
     self.index = index;
-    [_indexLabel setText: [NSString stringWithFormat:@"%lu.", index]];
+    [_indexLabel setText: [NSString stringWithFormat:@"%lu.", index + 1]];
 }
 
 -(void) setupAnswerText:(NSString *)text

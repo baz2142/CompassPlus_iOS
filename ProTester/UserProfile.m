@@ -25,9 +25,25 @@
 {
     UserProfile *user = [NSKeyedUnarchiver unarchiveObjectWithFile:path];
     
-    NSLog(user ? @"Success derialisation!" : @"Deserialisation have failed");
+    NSLog((user ? @"Success derialisation:%@" : @"Deserialisation have failed:%@"), path);
     
     return user;
+}
+
+-(void) addAnswer:(NSMutableArray*)array withIndex:(size_t)answerIndex;
+{
+    if (!self.statistics)
+    {
+        NSLog(@"==>Stat == NULL!!");
+        self.statistics = [NSMutableDictionary new];
+    }
+ 
+    NSLog(@"==>Adding for index %lu array = %@", answerIndex, array);
+    
+    if (self.statistics == NULL)
+        NSLog(@"STAT ANYWAY == NULL");
+    
+    [self.statistics setObject:array forKey:[NSNumber numberWithUnsignedInteger:answerIndex]];
 }
 
 -(void) encodeWithCoder:(NSCoder*)coder
@@ -51,6 +67,28 @@
         NSLog(@"Error: %@", error);
 }
 
+-(bool) isAnswerExists:(size_t)index
+{
+    return [self.statistics objectForKey:[NSNumber numberWithUnsignedInteger:index]] != NULL;
+}
+
+-(bool) isAnswerCorrect:(size_t)index withQuestion:(Question*)question;
+{
+    const NSMutableArray *arr = [self.statistics objectForKey:[NSNumber numberWithUnsignedInteger:index]];
+    
+    if (arr == NULL)
+        return false;
+    
+    return [arr isEqualToArray:question.answers];
+}
+
+-(bool) isStatisticsForQuestionAtIndexExists:(size_t)questionIndex;
+{
+    NSNumber *index = [NSNumber numberWithUnsignedInteger:questionIndex];
+    
+    return [self.statistics objectForKey:index] != NULL;
+}
+
 -(id) initWithCoder:(NSCoder*)coder
 {
     if (self = [super init])
@@ -71,5 +109,9 @@
     return [root stringByAppendingString:fileName];
 }
 
+-(NSMutableArray<NSNumber*>*) getStatisticsForQuestionAtIndex:(size_t)index
+{
+    return [self isStatisticsForQuestionAtIndexExists:index] ? [self.statistics objectForKey:[NSNumber numberWithUnsignedInteger:index]] : NULL;
+}
 
 @end

@@ -43,7 +43,7 @@
     
     [self.prevButton setEnabled:!isFirst];
     [self.nextButton setEnabled:!isLast];
-    [self.navigationItem setTitle:[NSString stringWithFormat:@"A question #%zu", self.index]];
+    [self.navigationItem setTitle:[NSString stringWithFormat:@"A question #%zu", self.index + 1]];
 }
 
 #pragma mark - Table view data source
@@ -60,11 +60,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    const size_t index = indexPath.row;
-    
-    NSLog(@"didSelectRowAtIndexPath at index = %lu", index);
-    
-    //[self updateControllWidgets];
+//    const size_t index = indexPath.row;
+//    
+//    NSLog(@"didSelectRowAtIndexPath at index = %lu", index);
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -99,7 +97,35 @@
 
 - (IBAction)confirmButtonPressed:(UIButton *)sender
 {
-    //[self.user.statistics set]
+    assert(self.user != NULL);
+    assert(self.user.statistics != NULL);
+    
+    const NSArray<NSIndexPath*> *selected = [self.answersTable indexPathsForSelectedRows];
+    NSMutableArray<NSNumber*>   *indeces  = [NSMutableArray new];
+    
+    for (NSIndexPath *index in selected)
+        [indeces addObject:[NSNumber numberWithUnsignedInteger:index.row]];
+    
+    [indeces sortUsingComparator:^NSComparisonResult(id  _Nonnull obj1, id  _Nonnull obj2)
+    {
+        NSNumber *a = obj1;
+        NSNumber *b = obj2;
+        
+        return [a compare:b];
+    }];
+    
+    [self.user addAnswer:indeces withIndex:self.index];
+    
+    NSLog(@"Confirm stat for %lu question", self.index);
+    NSLog(@"Indeces = %@", [indeces debugDescription]);
+    NSLog(@"Stat = %@", [self.user.statistics debugDescription]);
+}
+
+-(void) setupUser:(UserProfile*)userProfile
+{
+    assert(userProfile != NULL);
+    
+    self.user = userProfile;
 }
 
 @end

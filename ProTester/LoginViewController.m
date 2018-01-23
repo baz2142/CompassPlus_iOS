@@ -67,7 +67,10 @@
         self.user = [UserProfile deserialiseFileAsUserProfile:userProfilePath];
         
         if (!self.user)
-            self.user = [[UserProfile alloc] init];
+        {
+            self.user           = [UserProfile new];
+            self.user.loginName = name.copy;
+        }
     }
     
     [self showQuestionsCollectionViewController];

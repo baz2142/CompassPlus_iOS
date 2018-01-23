@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A719074120165E5600808C54 /* husky 7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A719073C20165E5600808C54 /* husky 7.jpg */; };
+		A719074220165E5600808C54 /* pinguin_2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A719073D20165E5600808C54 /* pinguin_2.jpg */; };
+		A719074320165E5600808C54 /* android-win-2-300x162.png in Resources */ = {isa = PBXBuildFile; fileRef = A719073E20165E5600808C54 /* android-win-2-300x162.png */; };
+		A719074420165E5600808C54 /* 1292513360_154.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A719073F20165E5600808C54 /* 1292513360_154.jpg */; };
+		A719074520165E5600808C54 /* Zalevskij75 - 7.jpg in Resources */ = {isa = PBXBuildFile; fileRef = A719074020165E5600808C54 /* Zalevskij75 - 7.jpg */; };
+		A71907482016606900808C54 /* PictureCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = A71907472016606900808C54 /* PictureCollectionViewCell.m */; };
+		A719074B201660ED00808C54 /* PictureCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A719074A201660ED00808C54 /* PictureCollectionViewController.m */; };
 		A72B86B21FFB6B9B00C7E1ED /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A72B86B11FFB6B9B00C7E1ED /* main.m */; };
 		A72B86B51FFB6B9B00C7E1ED /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A72B86B41FFB6B9B00C7E1ED /* AppDelegate.m */; };
 		A72B86B81FFB6B9B00C7E1ED /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A72B86B71FFB6B9B00C7E1ED /* ViewController.m */; };
@@ -27,6 +34,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A719073C20165E5600808C54 /* husky 7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "husky 7.jpg"; sourceTree = "<group>"; };
+		A719073D20165E5600808C54 /* pinguin_2.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pinguin_2.jpg; sourceTree = "<group>"; };
+		A719073E20165E5600808C54 /* android-win-2-300x162.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "android-win-2-300x162.png"; sourceTree = "<group>"; };
+		A719073F20165E5600808C54 /* 1292513360_154.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1292513360_154.jpg; sourceTree = "<group>"; };
+		A719074020165E5600808C54 /* Zalevskij75 - 7.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Zalevskij75 - 7.jpg"; sourceTree = "<group>"; };
+		A71907462016606900808C54 /* PictureCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureCollectionViewCell.h; sourceTree = "<group>"; };
+		A71907472016606900808C54 /* PictureCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureCollectionViewCell.m; sourceTree = "<group>"; };
+		A7190749201660ED00808C54 /* PictureCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureCollectionViewController.h; sourceTree = "<group>"; };
+		A719074A201660ED00808C54 /* PictureCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureCollectionViewController.m; sourceTree = "<group>"; };
 		A72B86AD1FFB6B9B00C7E1ED /* ProTester.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProTester.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A72B86B11FFB6B9B00C7E1ED /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		A72B86B31FFB6B9B00C7E1ED /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -75,6 +91,11 @@
 			isa = PBXGroup;
 			children = (
 				A7C43096200CFDF500C5BB39 /* plisttest.plist */,
+				A719073C20165E5600808C54 /* husky 7.jpg */,
+				A719073D20165E5600808C54 /* pinguin_2.jpg */,
+				A719073E20165E5600808C54 /* android-win-2-300x162.png */,
+				A719073F20165E5600808C54 /* 1292513360_154.jpg */,
+				A719074020165E5600808C54 /* Zalevskij75 - 7.jpg */,
 				A72B86AF1FFB6B9B00C7E1ED /* ProTester */,
 				A72B86AE1FFB6B9B00C7E1ED /* Products */,
 			);
@@ -120,6 +141,10 @@
 				A7E2CC5D2008D35C00974983 /* QuestionsCollectionViewController.m */,
 				A7B285EE200A13DD0079FFF5 /* TextCollectionViewCell.h */,
 				A7B285EF200A13DD0079FFF5 /* TextCollectionViewCell.m */,
+				A71907462016606900808C54 /* PictureCollectionViewCell.h */,
+				A71907472016606900808C54 /* PictureCollectionViewCell.m */,
+				A7190749201660ED00808C54 /* PictureCollectionViewController.h */,
+				A719074A201660ED00808C54 /* PictureCollectionViewController.m */,
 			);
 			path = ProTester;
 			sourceTree = "<group>";
@@ -190,11 +215,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A719074320165E5600808C54 /* android-win-2-300x162.png in Resources */,
 				A7C43097200CFDF500C5BB39 /* plisttest.plist in Resources */,
 				A761B4D92000D8D800DB76F5 /* questions.plist in Resources */,
 				A72B86C01FFB6B9B00C7E1ED /* LaunchScreen.storyboard in Resources */,
 				A72B86BD1FFB6B9B00C7E1ED /* Assets.xcassets in Resources */,
+				A719074220165E5600808C54 /* pinguin_2.jpg in Resources */,
 				A72B86BB1FFB6B9B00C7E1ED /* Main.storyboard in Resources */,
+				A719074120165E5600808C54 /* husky 7.jpg in Resources */,
+				A719074420165E5600808C54 /* 1292513360_154.jpg in Resources */,
+				A719074520165E5600808C54 /* Zalevskij75 - 7.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -208,12 +238,14 @@
 				A7C43095200CF60000C5BB39 /* TextCollectionViewCell.m in Sources */,
 				A7FFDC862003B2DF00006A3F /* LoginViewController.m in Sources */,
 				A72B86B81FFB6B9B00C7E1ED /* ViewController.m in Sources */,
+				A719074B201660ED00808C54 /* PictureCollectionViewController.m in Sources */,
 				A7FFDC892003B37600006A3F /* UserProfile.m in Sources */,
 				A7E2CC5E2008D35C00974983 /* QuestionsCollectionViewController.m in Sources */,
 				A7FFDC8320038F3300006A3F /* AnswerTableViewCell.m in Sources */,
 				A7F54A391FFE94A500CB0984 /* QuestionEditorViewController.m in Sources */,
 				A7F54A171FFBF99E00CB0984 /* Question.m in Sources */,
 				A7D3B8BD2003D90D00354DA7 /* QuestionViewController.m in Sources */,
+				A71907482016606900808C54 /* PictureCollectionViewCell.m in Sources */,
 				A72B86B51FFB6B9B00C7E1ED /* AppDelegate.m in Sources */,
 				A72B86B21FFB6B9B00C7E1ED /* main.m in Sources */,
 				A7F54A361FFE90C400CB0984 /* QuestionsTableViewController.m in Sources */,

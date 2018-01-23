@@ -19,16 +19,26 @@ static NSString* const reuseIdentifier = @"Cell";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    //[self.collectionView registerClass:[UICollectionViewController class] forCellWithReuseIdentifier:@"Cell"];
     
     const NSString *questionsPlistFilePath = [root stringByAppendingString:questionsPlistName];
-    
     _questions = [Question deserialiseFileAsArray:questionsPlistFilePath];
     
     if (_questions == nil)
         NSLog(@"QuestionsCollectionViewController: questions = nil!");
+}
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [self.collectionView reloadData];
+}
+
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
     
-    // Do any additional setup after loading the view.
+    NSString *pathPattern = [root stringByAppendingString:usersPattern];
+    
+    [self.user serialiseUserProfileToFile:[NSString stringWithFormat:pathPattern, self.user.loginName]];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,6 +59,7 @@ static NSString* const reuseIdentifier = @"Cell";
     NSLog(@"Selected cell at index = %lu", index);
     
     [controller setupQuestionWithArray:self.questions atIndex:index];
+    [controller setupUser:self.user];
 }
 
 
@@ -67,50 +78,71 @@ static NSString* const reuseIdentifier = @"Cell";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    const size_t            index  = indexPath.row;
-    TextCollectionViewCell  *cell  = (TextCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
-    NSString* const         text   = [NSString stringWithFormat:@"%lu", index];
+    const size_t            index       = indexPath.row;
+    TextCollectionViewCell  *cell       = (TextCollectionViewCell*)[collectionView dequeueReusableCellWithReuseIdentifier:@"Cell" forIndexPath:indexPath];
+    NSString* const         text        = [NSString stringWithFormat:@"%lu", index + 1];
+    const enum CellStat     cellStatus  = [self getStatusForCellAtIndex:index];
     
-    //[cell.textLabel setText:text];
     [cell setupText:text];
+    
+    if (cellStatus != CELL_STAT_UNAVAIBLE)
+        [cell setBackgroundColor: cellStatus == CELL_STAT_CORRECT ? UIColor.greenColor : UIColor.redColor];
+    else
+    {
+        NSLog(@"Cell %lu haven't stat", index);
+        [cell setBackgroundColor:UIColor.whiteColor];
+    }
     
     return cell;
 }
 
 -(void) setupUserProfile:(UserProfile*)userProfile
 {
+    assert(userProfile != NULL);
+    
     self.user = userProfile;
+}
+
+-(enum CellStat) getStatusForCellAtIndex:(size_t)index
+{
+    const bool isStatExists = [self.user isStatisticsForQuestionAtIndexExists:index];
+    
+    if (!isStatExists)
+        return CELL_STAT_UNAVAIBLE;
+    else
+    {
+        const Question *quest  = [self.questions objectAtIndex:index];
+        const NSMutableArray<NSNumber*> *correctIndeces = [quest getCorrectIndeces];
+        const NSMutableArray<NSNumber*> *statistics     = [self.user getStatisticsForQuestionAtIndex:index];
+        
+        bool (^isArraysContentEqual)(const NSMutableArray*, const NSMutableArray*) = ^bool(const NSMutableArray *a, const NSMutableArray *b)
+        {
+            const size_t size = a.count;
+            
+            if (b.count != size)
+                return false;
+            
+            NSLog(@"Array #1:");
+            for (size_t i = 0; i < size; ++i)
+                NSLog(@"%lu", (unsigned long)[[a objectAtIndex:i] unsignedIntegerValue]);
+            
+            NSLog(@"Array #2:");
+            for (size_t i = 0; i < size; ++i)
+                NSLog(@"%lu", (unsigned long)[[b objectAtIndex:i] unsignedIntegerValue]);
+            
+            for (size_t i = 0; i < size; ++i)
+                if (![[a objectAtIndex:i] isEqual:[b objectAtIndex:i]])
+                    return false;
+            
+            return true;
+        };
+        
+        return isArraysContentEqual(correctIndeces, statistics) ? CELL_STAT_CORRECT : CELL_STAT_INCORRECT;
+    }
 }
 
 #pragma mark <UICollectionViewDelegate>
 
-/*
-// Uncomment this method to specify if the specified item should be highlighted during tracking
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldHighlightItemAtIndexPath:(NSIndexPath *)indexPath {
-	return YES;
-}
-*/
 
-/*
-// Uncomment this method to specify if the specified item should be selected
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    return YES;
-}
-*/
-
-/*
-// Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-- (BOOL)collectionView:(UICollectionView *)collectionView shouldShowMenuForItemAtIndexPath:(NSIndexPath *)indexPath {
-	return NO;
-}
-
-- (BOOL)collectionView:(UICollectionView *)collectionView canPerformAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	return NO;
-}
-
-- (void)collectionView:(UICollectionView *)collectionView performAction:(SEL)action forItemAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender {
-	
-}
-*/
 
 @end

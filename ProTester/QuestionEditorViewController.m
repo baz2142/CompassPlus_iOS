@@ -21,6 +21,13 @@
     _tableView.delegate     = self;
     _tableView.dataSource   = self;
     
+    //[self setupPicture:@"android-win-2-300x162.png"];
+    
+//    UILabel *header = [UILabel new];
+//    [header setText:@"Answers 123"];
+//    
+//    [_tableView setTableHeaderView:header];
+    
     NSLog(@"QuestionEditorViewController did load!");
     NSLog(@"%@", [_question toNSString]);
     [self fillUIBasedOnQuestion];
@@ -46,14 +53,21 @@
 
 -(void) fillUIBasedOnQuestion
 {
-    [self.picturePathTextField          setText:[_question getPictPath]];
-    [self.questionTextField             setText:[_question getQuestionText]];
+    [self setupPicture:[_question getPictPath]];
+    [self.questionTextField setText:[_question getQuestionText]];
+}
+
+-(void) setupPicture:(NSString*)pictName
+{
+    [self.imageView setImage:[UIImage imageNamed:pictName]];
+    self.pictName = pictName.copy;
+    //[self.question setPictPath:pictName];
 }
 
 -(void) fillQuestionBasedOnUI
 {
-    [self.question setPictPath:             self.picturePathTextField.text];
-    [self.question setQuestionText:         self.questionTextField.text];
+    [self.question setPictPath:     self.pictName];
+    [self.question setQuestionText: self.questionTextField.text];
 }
 
 - (IBAction)addAnswer:(UIBarButtonItem *)sender
@@ -73,7 +87,8 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    NSLog(@"QuestionEditorViewController prepair for segue!");
+    PictureCollectionViewController *controller = segue.destinationViewController;
+    [controller setupImageView:self.imageView];
 }
 
 #pragma mark - Table view data source

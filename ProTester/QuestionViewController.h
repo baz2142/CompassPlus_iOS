@@ -24,6 +24,7 @@
 
 -(void) setupQuestionWithArray:(const NSMutableArray* const)quests atIndex:(size_t)index;
 -(void) setupUIBasedOnQuestion;
+-(void) setupUser:(UserProfile*)userProfile;
 
 -(Question*) getCurrentQuestion;
 

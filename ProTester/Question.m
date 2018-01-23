@@ -14,10 +14,10 @@
 {
     if (self = [super init])
     {
-        _pictPath               = @"A pictures path is undefied";
+        _pictPath               = @"android-win-2-300x162.png";
         _questionText           = @"A question text is undefined";
-        _answers                = [[NSMutableArray alloc] init];
-        _correctAnswersIndeces  = [[NSMutableDictionary alloc] init];
+        _answers                = [NSMutableArray new];
+        _correctAnswersIndeces  = [NSMutableDictionary new];
     }
     
     return self;
@@ -94,6 +94,23 @@
     return _answers != NULL ? [_answers objectAtIndex:index] : NULL;
 }
 
+-(NSMutableArray<NSNumber*>*) getCorrectIndeces
+{
+    const size_t size = self.correctAnswersIndeces.count;
+    NSMutableArray<NSNumber*> *result = [NSMutableArray new];
+    ;
+    
+    for (size_t i = 0; i < size; ++i)
+    {
+        NSNumber *index = [NSNumber numberWithUnsignedInteger:i];
+        const bool isAnswerCorrect = [[self.correctAnswersIndeces objectForKey:index] boolValue];
+        
+        if (isAnswerCorrect)
+            [result addObject:[index copy]];
+    }
+    
+    return result;
+}
 
 +(void) serialiseArrayToFile:(NSMutableArray<Question*> *)array listFilePath:(NSString *)path;
 {
@@ -114,7 +131,7 @@
 {
     NSMutableArray<Question*> *array = [NSKeyedUnarchiver unarchiveObjectWithFile:[path copy]];
     
-    NSLog(array ? @"Success derialisation!" : @"Deserialisation have failed");
+    NSLog((array ? @"Success derialisation:%@!" : @"Deserialisation have failed:%@"), path);
     
     return array;
 }

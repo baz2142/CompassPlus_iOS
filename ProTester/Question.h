@@ -29,6 +29,8 @@
 -(NSString*)    getQuestionText;
 -(NSString*)    getAnswerAtIndex: (size_t)index;
 
+-(NSMutableArray<NSNumber*>*) getCorrectIndeces;
+
 +(void) serialiseArrayToFile:(NSMutableArray<Question*>*)array listFilePath:(NSString *)path;
 +(NSMutableArray<Question*>*) deserialiseFileAsArray:(const NSString *)path;
 
